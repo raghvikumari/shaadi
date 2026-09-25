@@ -93,39 +93,16 @@
 
 .diya-glow-background {
     position: absolute;
-    inset: 0;
-
-    width: 100%;
-    height: 100%;
-
-    border-radius: 0;
-
+    left: 50%;
+    top: 55%;
+    width: 520px;
+    height: 520px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
     background:
-        radial-gradient(
-            circle at 50% 55%,
-            rgba(255, 210, 110, 0.35),
-            rgba(255, 130, 45, 0.12) 25%,
-            transparent 55%
-        );
-
-    opacity: 0;
-
-    transform: none;
-
-    filter: none;
-
-    pointer-events: none;
-
-    transition:
-        opacity 1.5s ease;
-}
-
-
-/* After diya is lit */
-
-.diya-opening.is-lit .diya-glow-background {
-    opacity: 1;
-    transform: none;
+        radial-gradient(circle, rgba(255, 176, 32, .16), rgba(255, 130, 40, .06) 42%, transparent 72%);
+    filter: blur(22px);
+    transition: transform 2s ease, opacity 2s ease;
 }
 
 .diya-opening.is-lit .diya-glow-background {
@@ -1050,29 +1027,6 @@
    VIBRANT LIGHT EFFECT AFTER DIYA IS LIT
    ========================================================= */
 
-/* .diya-opening {
-    position: relative;
-    overflow: hidden;
-
-    
-    background:
-        radial-gradient(
-            circle at 50% 55%,
-            rgba(255, 140, 40, 0.08),
-            transparent 35%
-        ),
-        linear-gradient(
-            135deg,
-            #160608 0%,
-            #2a090d 45%,
-            #120406 100%
-        );
-
-    transition:
-        background 1.8s ease,
-        box-shadow 1.8s ease;
-} */
-
 /* =========================================================
    DIYA OPENING — BASE BACKGROUND
    ========================================================= */
@@ -1104,25 +1058,11 @@
         box-shadow 2s ease;
 }
 
+
 /* ---------------------------------------------------------
    AFTER DIYA IS CLICKED
    --------------------------------------------------------- */
 
-/* .diya-opening.is-lit {
-
-    background:
-        radial-gradient(
-            circle at 50% 50%,
-            rgba(255, 214, 105, 0.95) 0%,
-            rgba(255, 153, 51, 0.75) 18%,
-            rgba(183, 54, 48, 0.65) 42%,
-            rgba(91, 18, 30, 0.95) 72%,
-            #24070b 100%
-        );
-
-    box-shadow:
-        inset 0 0 180px rgba(255, 180, 60, 0.45);
-} */
 /* =========================================================
    AFTER DIYA IS LIT
    ========================================================= */
@@ -1179,6 +1119,44 @@
 .diya-opening.is-lit::after {
     opacity: 1;
     transform: scale(1.15);
+}
+.diya-opening.is-lit .diya-glow-background {
+    opacity: 1;
+    transform: scale(1.8);
+    filter: blur(20px);
+}
+
+.diya-glow-background {
+    opacity: 0.15;
+
+    transition:
+        opacity 1.2s ease,
+        transform 2s cubic-bezier(.16, 1, .3, 1),
+        filter 1.5s ease;
+
+    transform: scale(0.8);
+}
+.diya-opening.is-bursting {
+    animation: diyaLightBurst 1.4s ease-out;
+}
+
+@keyframes diyaLightBurst {
+
+    0% {
+        filter: brightness(1);
+    }
+
+    35% {
+        filter: brightness(1.8);
+    }
+
+    60% {
+        filter: brightness(1.35);
+    }
+
+    100% {
+        filter: brightness(1);
+    }
 }
 /* =========================================================
    VIBRANT BACKGROUND + HIGH CONTRAST TEXT
@@ -1344,6 +1322,55 @@
 .diya-opening.is-lit .diya-bottom i {
     background: #5c1018;
 }
+.diya-glow-background {
+    position: absolute;
+    width: 55vw;
+    height: 55vw;
+    max-width: 750px;
+    max-height: 750px;
+
+    left: 50%;
+    top: 50%;
+
+    transform:
+        translate(-50%, -50%)
+        scale(.35);
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255, 236, 166, 0.95) 0%,
+            rgba(255, 190, 72, 0.65) 18%,
+            rgba(255, 110, 45, 0.35) 38%,
+            transparent 70%
+        );
+
+    filter: blur(25px);
+
+    opacity: .12;
+
+    pointer-events: none;
+
+    transition:
+        transform 2s cubic-bezier(.16, 1, .3, 1),
+        opacity 1.5s ease,
+        filter 1.5s ease;
+}
+
+
+/* Glow expands after diya is lit */
+
+.diya-opening.is-lit .diya-glow-background {
+    transform:
+        translate(-50%, -50%)
+        scale(1.8);
+
+    opacity: 1;
+
+    filter: blur(35px);
+}
 /* =========================================================
    MANDALA LIGHTING
    ========================================================= */
@@ -1504,4 +1531,138 @@
         box-shadow:
             0 0 80px 30px rgba(255, 175, 55, .35);
     }
+}
+.diya-glow-background {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    border-radius: 0;
+
+    background:
+        radial-gradient(
+            circle at 50% 55%,
+            rgba(255, 210, 110, 0.35),
+            rgba(255, 130, 45, 0.12) 25%,
+            transparent 55%
+        );
+
+    opacity: 0;
+
+    transform: none;
+
+    filter: none;
+
+    pointer-events: none;
+
+    transition:
+        opacity 1.5s ease;
+}
+
+
+/* After diya is lit */
+
+.diya-opening.is-lit .diya-glow-background {
+    opacity: 1;
+    transform: none;
+}
+/* =========================================================
+   DIYA — FLAME SHOULD NOT BE VISIBLE INITIALLY
+   Flame appears only after the user clicks the diya
+   ========================================================= */
+
+/* ---------- BEFORE CLICK ---------- */
+
+.diya-flame {
+    opacity: 0 !important;
+
+    transform:
+        translateX(-50%)
+        rotate(2deg)
+        scale(0.3) !important;
+
+    pointer-events: none;
+}
+
+.diya-flame-glow {
+    opacity: 0 !important;
+
+    transform:
+        translateX(-50%)
+        scale(0.3) !important;
+
+    pointer-events: none;
+}
+
+
+/* Hide the wick initially as well */
+/* =========================================================
+   DIYA BATTI / WICK
+   Visible before and after lighting
+   ========================================================= */
+
+.diya-wick {
+    position: absolute;
+
+    left: 50%;
+    top: 91px;
+
+    width: 5px;
+    height: 20px;
+
+    transform:
+        translateX(-50%)
+        rotate(-3deg);
+
+    border-radius: 5px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #1c0b06 0%,
+            #4a2c1c 45%,
+            #1c0b06 100%
+        );
+
+    box-shadow:
+        0 1px 2px rgba(0, 0, 0, 0.5);
+
+    opacity: 1 !important;
+
+    z-index: 5;
+}
+
+
+/* ---------- AFTER DIYA IS CLICKED ---------- */
+
+.diya-opening.is-lit .diya-flame {
+    opacity: 1 !important;
+
+    transform:
+        translateX(-50%)
+        rotate(-2deg)
+        scale(1) !important;
+
+    animation:
+        diyaFlameDance
+        1.1s
+        ease-in-out
+        infinite
+        alternate;
+}
+
+
+.diya-opening.is-lit .diya-flame-glow {
+    opacity: 1 !important;
+
+    transform:
+        translateX(-50%)
+        scale(2.3) !important;
+}
+
+
+.diya-opening.is-lit .diya-wick {
+    opacity: 1 !important;
 }
