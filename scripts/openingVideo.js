@@ -799,6 +799,9 @@
         const grandParticles =
             document.getElementById("grandSceneParticles");
 
+        const diyaClickHint =
+            document.getElementById("diyaClickHint");
+
 
         if (!diyaHolder) {
             console.error("Diya element not found.");
@@ -1019,6 +1022,20 @@
             welcome.classList.add("is-bursting");
 
             createDiyaParticles();
+
+            // Belt-and-braces: don't just rely on the CSS class fading
+            // the hint out — actually remove it from layout so it can
+            // never sit underneath the revealed invitation text.
+            if (diyaClickHint) {
+
+                diyaClickHint.setAttribute("aria-hidden", "true");
+
+                setTimeout(function () {
+
+                    diyaClickHint.style.display = "none";
+
+                }, 500);
+            }
 
             setTimeout(function () {
 
