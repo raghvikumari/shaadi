@@ -1,195 +1,4314 @@
-.video-container {
+/* ============================================================
+   WEDDING INVITATION
+   WELCOME / DIYA OPENING
+   ============================================================ */
+
+
+/* ============================================================
+   RESET - ONLY INSIDE WELCOME COMPONENT
+   ============================================================ */
+
+.diya-opening,
+.diya-opening *,
+.grand-wedding-scene,
+.grand-wedding-scene * {
+    box-sizing: border-box;
+}
+
+
+/* ============================================================
+   MAIN DIYA OPENING
+   ============================================================ */
+
+.diya-opening {
+
+    position: relative;
+
     width: 100%;
+
+    min-height: 100vh;
+
     height: 100vh;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    background: #fff;
     overflow: hidden;
-}
 
-.opening-video {
-    height: 100vh;
-    width: auto;
+    background:
+        radial-gradient(
+            circle at 50% 45%,
+            #3b1b18 0%,
+            #1d0d0e 38%,
+            #080405 75%,
+            #030203 100%
+        );
 
-    transform: scale(1.1);
-    /* Slight zoom from all sides */
-    transform-origin: center center;
+    color: #f3d99d;
 
-    display: block;
-}
+    font-family:
+        "Times New Roman",
+        Georgia,
+        serif;
 
-@media (max-width: 768px) {
-
-    .opening-video {
-        transform: translate(-50%, -50%) scale(-1.2);
-    }
-
-    .tap-button {
-        width: 80%;
-        max-width: 280px;
-
-        padding: 12px 0;
-
-        font-size: 16px;
-
-        bottom: 40px;
-    }
+    isolation: isolate;
 
 }
 
-@media (max-width: 480px) {
 
-    .opening-video {
-        transform: translate(-50%, -50%) scale(4);
-    }
+/* ============================================================
+   BACKGROUND
+   ============================================================ */
 
-    .tap-button {
-        width: 88%;
-        max-width: 260px;
+.diya-background {
 
-        font-size: 15px;
-
-        bottom: 30px;
-    }
-
-}
-
-@media (max-width: 360px) {
-
-    .opening-video {
-        transform: translate(-50%, -50%) scale(4);
-    }
-
-    .tap-button {
-        width: 92%;
-        font-size: 14px;
-    }
-
-}
-
-.tap-button {
     position: absolute;
+
+    inset: 0;
+
+    z-index: 1;
+
+    pointer-events: none;
+
+}
+
+
+.diya-vignette {
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            transparent 15%,
+            rgba(0, 0, 0, .20) 48%,
+            rgba(0, 0, 0, .75) 100%
+        );
+
+}
+
+
+.diya-glow-background {
+
+    position: absolute;
+
     left: 50%;
-    bottom: clamp(20px, 5vw, 40px);
-    transform: translateX(-50%);
 
-    padding: clamp(12px, 2vw, 16px) clamp(32px, 6vw, 55px);
+    top: 55%;
 
-    background: rgba(255,255,255,0.92);
-    backdrop-filter: blur(10px);
+    width: 500px;
 
-    border: 1.5px solid rgba(230,170,185,.8);
-    border-radius: 999px;
+    height: 500px;
 
-    color: #b4586d;
-    font-size: clamp(14px, 2vw, 18px);
-    font-weight: 500;
-    letter-spacing: clamp(2px, 0.5vw, 4px);
-    text-transform: uppercase;
-    white-space: nowrap;
+    transform:
+        translate(-50%, -50%);
 
-    cursor: pointer;
-    z-index: 10;
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(231, 171, 75, .12),
+            rgba(231, 171, 75, .035) 40%,
+            transparent 72%
+        );
+
+    filter: blur(20px);
+
+    opacity: .65;
+
+    transition:
+        transform 2s ease,
+        opacity 2s ease;
+
+}
+
+
+.diya-opening.is-lit
+.diya-glow-background {
+
+    transform:
+        translate(-50%, -50%)
+        scale(2.4);
+
+    opacity: 1;
+
+}
+
+
+.diya-moon-glow {
+
+    position: absolute;
+
+    top: 50%;
+
+    left: 50%;
+
+    width: 250px;
+
+    height: 250px;
+
+    transform:
+        translate(-50%, -50%);
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255, 210, 111, .16),
+            transparent 70%
+        );
+
+    filter: blur(30px);
+
+    opacity: .25;
+
+    transition:
+        opacity 2s ease,
+        transform 2s ease;
+
+}
+
+
+.diya-opening.is-lit
+.diya-moon-glow {
+
+    opacity: 1;
+
+    transform:
+        translate(-50%, -50%)
+        scale(2.8);
+
+}
+
+
+/* ============================================================
+   PARTICLES
+   ============================================================ */
+
+.diya-particles {
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 4;
+
+    pointer-events: none;
+
+}
+
+
+.diya-particle {
+
+    position: absolute;
+
+    width: 4px;
+
+    height: 4px;
+
+    border-radius: 50%;
+
+    background: #e9c477;
 
     box-shadow:
-        0 0 12px rgba(232,158,176,.35),
-        0 0 30px rgba(232,158,176,.18);
+        0 0 8px rgba(255, 207, 111, .8),
+        0 0 18px rgba(255, 183, 67, .35);
 
-    animation: tapPulse 2.2s ease-in-out infinite;
-    transition: all .3s ease;
+    opacity: 0;
+
+    animation:
+        diyaParticleFloat
+        var(--particle-duration)
+        ease-in-out
+        var(--particle-delay)
+        infinite;
+
 }
 
-.tap-button:hover {
-    animation-play-state: paused;
-    transform: translateX(-50%) scale(1.05);
-}
 
-.tap-button:active {
-    transform: translateX(-50%) scale(.97);
-}
-
-/* Tablets */
-@media (max-width: 768px) {
-    .tap-button {
-        width: 80%;
-        max-width: 340px;
-    }
-}
-
-/* Mobile */
-@media (max-width: 480px) {
-    .tap-button {
-        width: 88%;
-        max-width: 320px;
-
-        padding: 14px 20px;
-
-        font-size: 15px;
-        letter-spacing: 2px;
-    }
-}
-
-/* Very Small Phones */
-@media (max-width: 360px) {
-    .tap-button {
-        width: 92%;
-
-        font-size: 14px;
-        padding: 12px 16px;
-        letter-spacing: 1.5px;
-    }
-}
-
-@keyframes tapPulse {
+@keyframes diyaParticleFloat {
 
     0% {
-        transform: translateX(-50%) scale(1);
-        opacity: .65;
 
-        box-shadow:
-            0 0 8px rgba(232,158,176,.20),
-            0 0 18px rgba(232,158,176,.10);
+        opacity: 0;
+
+        transform:
+            translate3d(
+                0,
+                25px,
+                0
+            )
+            scale(.4);
+
     }
 
-    50% {
-        transform: translateX(-50%) scale(1.06);
+    20% {
+
+        opacity: .7;
+
+    }
+
+    60% {
+
         opacity: 1;
 
-        box-shadow:
-            0 0 18px rgba(232,158,176,.55),
-            0 0 40px rgba(232,158,176,.30);
     }
 
     100% {
-        transform: translateX(-50%) scale(1);
-        opacity: .65;
 
-        box-shadow:
-            0 0 8px rgba(232,158,176,.20),
-            0 0 18px rgba(232,158,176,.10);
+        opacity: 0;
+
+        transform:
+            translate3d(
+                var(--particle-x),
+                -140px,
+                0
+            )
+            scale(1.2);
+
     }
+
 }
 
 
+/* ============================================================
+   MANDALA
+   ============================================================ */
+
+.diya-mandala {
+
+    position: absolute;
+
+    left: 50%;
+
+    top: 50%;
+
+    width:
+        min(700px, 90vw);
+
+    height:
+        min(700px, 90vw);
+
+    transform:
+        translate(-50%, -50%)
+        scale(.55);
+
+    z-index: 2;
+
+    opacity: .08;
+
+    pointer-events: none;
+
+    transition:
+        transform 3s
+        cubic-bezier(.16, 1, .3, 1),
+
+        opacity 3s ease;
+
+}
+
+
+.diya-opening.is-lit
+.diya-mandala {
+
+    transform:
+        translate(-50%, -50%)
+        scale(1);
+
+    opacity: .17;
+
+}
+
+
+.diya-mandala-ring {
+
+    position: absolute;
+
+    left: 50%;
+
+    top: 50%;
+
+    border:
+        1px solid
+        rgba(211, 169, 95, .65);
+
+    border-radius: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+}
+
+
+.ring-one {
+
+    width: 45%;
+
+    height: 45%;
+
+}
+
+
+.ring-two {
+
+    width: 65%;
+
+    height: 65%;
+
+}
+
+
+.ring-three {
+
+    width: 85%;
+
+    height: 85%;
+
+}
+
+
+.diya-mandala-center {
+
+    position: absolute;
+
+    left: 50%;
+
+    top: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    color:
+        rgba(231, 192, 117, .75);
+
+    font-size:
+        clamp(50px, 8vw, 100px);
+
+    opacity: .35;
+
+}
+
+
+/* ============================================================
+   CONTENT
+   ============================================================ */
+
+.diya-content {
+
+    position: relative;
+
+    width: 100%;
+
+    height: 100%;
+
+    z-index: 10;
+
+}
+
+
+/* ============================================================
+   INTRO TEXT
+   ============================================================ */
+
+.diya-intro {
+
+    position: absolute;
+
+    left: 50%;
+
+    top: 17%;
+
+    transform:
+        translateX(-50%);
+
+    width: 90%;
+
+    text-align: center;
+
+    z-index: 15;
+
+    transition:
+        opacity 1s ease,
+        transform 1s ease;
+
+}
+
+
+.diya-top-symbol {
+
+    margin-bottom: 15px;
+
+    color: #d8b16b;
+
+    font-size: 20px;
+
+    animation:
+        symbolGlow
+        2.5s
+        ease-in-out
+        infinite alternate;
+
+}
+
+
+@keyframes symbolGlow {
+
+    from {
+
+        opacity: .45;
+
+        transform:
+            scale(.95);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            scale(1.1);
+
+    }
+
+}
+
+
+.diya-intro-small {
+
+    margin: 0;
+
+    color:
+        #c39a59;
+
+    font-size: 9px;
+
+    letter-spacing: 5px;
+
+}
+
+
+.diya-intro-blessing {
+
+    margin:
+        18px 0;
+
+    color:
+        #e9cb8d;
+
+    font-size: 18px;
+
+}
+
+
+.diya-small-line {
+
+    width: 80px;
+
+    height: 1px;
+
+    margin: 15px auto;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #cda35d,
+            transparent
+        );
+
+}
+
+
+.diya-instruction {
+
+    margin:
+        25px 0 8px;
+
+    color:
+        #d9b774;
+
+    font-size: 9px;
+
+    letter-spacing: 4px;
+
+}
+
+
+.diya-instruction-sub {
+
+    margin: 0;
+
+    color:
+        rgba(221, 192, 137, .65);
+
+    font-size: 10px;
+
+    letter-spacing: 1px;
+
+}
+
+
+/* ============================================================
+   DIYA HOLDER
+   ============================================================ */
+
+.diya-holder {
+
+    position: absolute;
+
+    left: 50%;
+
+    top: 53%;
+
+    width: 230px;
+
+    height: 220px;
+
+    transform:
+        translate(-50%, -50%);
+
+    padding: 0;
+
+    border: 0;
+
+    outline: none;
+
+    background: transparent;
+
+    cursor: pointer;
+
+    z-index: 20;
+
+    touch-action: manipulation;
+
+    transition:
+        transform 1s
+        cubic-bezier(.16, 1, .3, 1),
+        opacity 1s ease;
+
+}
+
+
+.diya-holder:hover {
+
+    transform:
+        translate(-50%, -50%)
+        scale(1.04);
+
+}
+
+
+.diya-holder:focus-visible {
+
+    outline:
+        2px solid
+        rgba(235, 201, 127, .8);
+
+    outline-offset: 10px;
+
+    border-radius: 50%;
+
+}
+
+
+/* ============================================================
+   FLAME GLOW
+   ============================================================ */
+
+.diya-flame-glow {
+
+    position: absolute;
+
+    left: 50%;
+
+    top: 17%;
+
+    width: 90px;
+
+    height: 110px;
+
+    transform:
+        translateX(-50%);
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(255, 204, 94, .55),
+            rgba(255, 157, 39, .20) 40%,
+            transparent 72%
+        );
+
+    filter: blur(18px);
+
+    opacity: .55;
+
+    transition:
+        transform 1.2s ease,
+        opacity 1.2s ease;
+
+}
+
+
+.diya-opening.is-lit
+.diya-flame-glow {
+
+    opacity: 1;
+
+    transform:
+        translateX(-50%)
+        scale(2.2);
+
+}
+
+
+/* ============================================================
+   FLAME
+   ============================================================ */
+
+.diya-flame {
+
+    position: absolute;
+
+    left: 50%;
+
+    top: 26%;
+
+    width: 38px;
+
+    height: 65px;
+
+    transform:
+        translateX(-50%);
+
+    border-radius:
+        50% 50% 48% 48% /
+        65% 65% 35% 35%;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fff5bf 0%,
+            #ffd35a 30%,
+            #ff9b28 65%,
+            #d9571c 100%
+        );
+
+    box-shadow:
+        0 0 18px
+        rgba(255, 191, 61, .9),
+
+        0 0 40px
+        rgba(255, 146, 32, .5);
+
+    transform-origin:
+        50% 90%;
+
+    animation:
+        flameMovement
+        1.1s
+        ease-in-out
+        infinite alternate;
+
+}
+
+
+@keyframes flameMovement {
+
+    0% {
+
+        transform:
+            translateX(-50%)
+            rotate(-3deg)
+            scaleY(.95);
+
+    }
+
+    100% {
+
+        transform:
+            translateX(-50%)
+            rotate(3deg)
+            scaleY(1.05);
+
+    }
+
+}
+
+
+.diya-flame-inner {
+
+    position: absolute;
+
+    left: 50%;
+
+    top: 15%;
+
+    width: 13px;
+
+    height: 35px;
+
+    transform:
+        translateX(-50%);
+
+    border-radius: 50%;
+
+    background:
+        #fff8dc;
+
+    filter:
+        blur(1px);
+
+}
+
+
+/* ============================================================
+   WICK
+   ============================================================ */
+
+.diya-wick {
+
+    position: absolute;
+
+    left: 50%;
+
+    top: 53%;
+
+    width: 5px;
+
+    height: 28px;
+
+    transform:
+        translateX(-50%)
+        rotate(3deg);
+
+    border-radius: 5px;
+
+    background:
+        #39251a;
+
+}
+
+
+/* ============================================================
+   BOWL
+   ============================================================ */
+
+.diya-bowl {
+
+    position: absolute;
+
+    left: 50%;
+
+    top: 63%;
+
+    width: 145px;
+
+    height: 65px;
+
+    transform:
+        translateX(-50%);
+
+    border-radius:
+        10px 10px 55px 55px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #d79536 0%,
+            #a74d24 35%,
+            #63231b 75%,
+            #35100e 100%
+        );
+
+    box-shadow:
+        inset 0 8px 15px
+        rgba(255, 224, 131, .22),
+
+        0 15px 30px
+        rgba(0, 0, 0, .45);
+
+}
+
+
+/* ============================================================
+   OIL
+   ============================================================ */
+
+.diya-oil {
+
+    position: absolute;
+
+    left: 50%;
+
+    top: 4px;
+
+    width: 115px;
+
+    height: 25px;
+
+    transform:
+        translateX(-50%);
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            ellipse,
+            #9e541f,
+            #522018
+        );
+
+}
+
+
+.diya-bowl-highlight {
+
+    position: absolute;
+
+    left: 20px;
+
+    right: 20px;
+
+    top: 8px;
+
+    height: 4px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255, 219, 126, .45);
+
+}
+
+
+/* ============================================================
+   PLATE
+   ============================================================ */
+
+.diya-plate {
+
+    position: absolute;
+
+    left: 50%;
+
+    top: 90%;
+
+    width: 200px;
+
+    height: 35px;
+
+    transform:
+        translateX(-50%);
+
+    border-radius: 50%;
+
+    border:
+        2px solid
+        rgba(205, 157, 71, .75);
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(191, 124, 37, .35),
+            rgba(80, 28, 18, .2)
+        );
+
+    box-shadow:
+        0 10px 20px
+        rgba(0, 0, 0, .4);
+
+}
+
+
+.diya-plate span {
+
+    position: absolute;
+
+    top: 50%;
+
+    width: 5px;
+
+    height: 5px;
+
+    transform:
+        translateY(-50%);
+
+    border-radius: 50%;
+
+    background:
+        #e1b766;
+
+}
+
+
+.diya-plate span:nth-child(1) {
+
+    left: 25px;
+
+}
+
+
+.diya-plate span:nth-child(2) {
+
+    left: 65px;
+
+}
+
+
+.diya-plate span:nth-child(3) {
+
+    right: 65px;
+
+}
+
+
+.diya-plate span:nth-child(4) {
+
+    right: 25px;
+
+}
+
+
+/* ============================================================
+   REVEAL CONTENT
+   ============================================================ */
+
+.diya-reveal {
+
+    position: absolute;
+
+    left: 50%;
+
+    top: 51%;
+
+    width: min(900px, 94vw);
+
+    transform:
+        translate(-50%, -45%)
+        scale(.92);
+
+    text-align: center;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    z-index: 25;
+
+    transition:
+        opacity 1.2s ease,
+        transform 1.2s
+        cubic-bezier(.16, 1, .3, 1);
+
+}
+
+
+.diya-opening.is-revealed
+.diya-reveal {
+
+    opacity: 1;
+
+    transform:
+        translate(-50%, -50%)
+        scale(1);
+
+    pointer-events: auto;
+
+}
+
+
+/* ============================================================
+   HIDE INTRO AFTER REVEAL
+   ============================================================ */
+
+.diya-opening.is-revealed
+.diya-intro {
+
+    opacity: 0;
+
+    transform:
+        translate(-50%, -50px);
+
+    pointer-events: none;
+
+}
+
+
+/* ============================================================
+   HIDE DIYA AFTER REVEAL
+   ============================================================ */
+
+.diya-opening.is-revealed
+.diya-holder {
+
+    opacity: 0;
+
+    transform:
+        translate(-50%, -50%)
+        scale(.65);
+
+    pointer-events: none;
+
+}
+
+
+/* ============================================================
+   REVEAL SYMBOL
+   ============================================================ */
+
+.diya-reveal-symbol {
+
+    margin-bottom: 12px;
+
+    color:
+        #d7ad62;
+
+    font-size: 20px;
+
+}
+
+
+.diya-blessing {
+
+    margin: 0;
+
+    color:
+        #e7c987;
+
+    font-size: 18px;
+
+}
+
+
+.diya-family {
+
+    margin:
+        18px 0 0;
+
+    color:
+        #a9824e;
+
+    font-size: 8px;
+
+    letter-spacing: 4px;
+
+}
+
+
+/* ============================================================
+   GOLD DIVIDER
+   ============================================================ */
+
+.diya-gold-divider {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    margin:
+        20px auto;
+
+}
+
+
+.diya-gold-divider span {
+
+    width: 75px;
+
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #cba15b
+        );
+
+}
+
+
+.diya-gold-divider span:last-child {
+
+    background:
+        linear-gradient(
+            90deg,
+            #cba15b,
+            transparent
+        );
+
+}
+
+
+.diya-gold-divider b {
+
+    color:
+        #d9b46b;
+
+    font-size: 13px;
+
+    font-weight: 400;
+
+}
+
+
+/* ============================================================
+   NAMES
+   ============================================================ */
+
+.diya-names {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 18px;
+
+    margin: 0;
+
+    color:
+        #f2d9a0;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        clamp(38px, 6vw, 64px);
+
+    font-weight: 400;
+
+    letter-spacing: -1px;
+
+}
+
+
+.diya-names b {
+
+    color:
+        #c69a55;
+
+    font-size: 28px;
+
+    font-weight: 400;
+
+}
+
+
+/* ============================================================
+   TAGLINE
+   ============================================================ */
+
+.diya-tagline {
+
+    margin:
+        18px 0 0;
+
+    color:
+        #a9824e;
+
+    font-size: 8px;
+
+    letter-spacing: 4px;
+
+}
+
+
+.diya-date {
+
+    margin:
+        12px 0 0;
+
+    color:
+        #d1ac68;
+
+    font-size: 10px;
+
+    letter-spacing: 3px;
+
+}
+
+
+/* ============================================================
+   ENTER OUR STORY BUTTON
+   ============================================================ */
+
+.diya-enter {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 16px;
+
+    margin-top: 30px;
+
+    padding:
+        13px 22px;
+
+    border:
+        1px solid
+        rgba(214, 174, 95, .65);
+
+    border-radius: 40px;
+
+    background:
+        rgba(89, 35, 29, .55);
+
+    color:
+        #ead19a;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 9px;
+
+    letter-spacing: 3px;
+
+    cursor: pointer;
+
+    position: relative;
+
+    z-index: 100;
+
+    pointer-events: auto;
+
+    transition:
+        background .3s ease,
+        transform .3s ease,
+        box-shadow .3s ease,
+        border-color .3s ease;
+
+}
+
+
+.diya-enter span {
+
+    pointer-events: none;
+
+}
+
+
+.diya-enter b {
+
+    font-size: 17px;
+
+    font-weight: 400;
+
+    pointer-events: none;
+
+}
+
+
+.diya-enter:hover {
+
+    transform:
+        translateY(-3px);
+
+    background:
+        rgba(157, 99, 44, .35);
+
+    border-color:
+        rgba(236, 197, 116, .9);
+
+    box-shadow:
+        0 10px 30px
+        rgba(191, 137, 55, .25);
+
+}
+
+
+.diya-enter:active {
+
+    transform:
+        translateY(0)
+        scale(.97);
+
+}
+
+
+/* ============================================================
+   BOTTOM
+   ============================================================ */
+
+.diya-bottom {
+
+    position: absolute;
+
+    left: 50%;
+
+    bottom: 25px;
+
+    transform:
+        translateX(-50%);
+
+    z-index: 15;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    color:
+        rgba(214, 179, 108, .45);
+
+    font-size: 7px;
+
+    letter-spacing: 3px;
+
+}
+
+
+.diya-bottom i {
+
+    width: 35px;
+
+    height: 1px;
+
+    background:
+        rgba(197, 151, 75, .35);
+
+}
+
+
+/* ============================================================
+   LIGHT BURST
+   ============================================================ */
+
+.diya-light-burst {
+
+    position: absolute;
+
+    left: 50%;
+
+    top: 50%;
+
+    width: 50px;
+
+    height: 50px;
+
+    transform:
+        translate(-50%, -50%)
+        scale(0);
+
+    z-index: 30;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255, 241, 190, .95),
+            rgba(255, 194, 76, .35) 35%,
+            transparent 70%
+        );
+
+    pointer-events: none;
+
+    opacity: 0;
+
+}
+
+
+.diya-opening.is-bursting
+.diya-light-burst {
+
+    animation:
+        diyaLightBurst
+        1.4s
+        cubic-bezier(.16, 1, .3, 1)
+        forwards;
+
+}
+
+
+@keyframes diyaLightBurst {
+
+    0% {
+
+        transform:
+            translate(-50%, -50%)
+            scale(0);
+
+        opacity: 0;
+
+    }
+
+    20% {
+
+        opacity: 1;
+
+    }
+
+    100% {
+
+        transform:
+            translate(-50%, -50%)
+            scale(35);
+
+        opacity: 0;
+
+    }
+
+}
+
+
+/* ============================================================
+   GRAND WEDDING IMAGE SECTION
+   ============================================================ */
+
+/*
+   IMPORTANT:
+   This is NOT fixed.
+
+   It is a normal section in the document.
+
+   Therefore:
+   DIYA
+       ↓
+   GRAND IMAGE
+       ↓
+   SAVE THE DATE
+*/
+
+.grand-wedding-scene {
+
+    position: relative;
+
+    width: 100%;
+
+    height: 100vh;
+
+    min-height: 600px;
+
+    display: none;
+
+    overflow: hidden;
+
+    background:
+        #160607;
+
+    opacity: 1;
+
+    visibility: visible;
+
+    pointer-events: auto;
+
+    transform: none;
+
+    z-index: 20;
+
+    isolation: isolate;
+
+}
+
+
+/* ============================================================
+   SHOW GRAND SECTION
+   ============================================================ */
+
+.grand-wedding-scene.grand-scene-active {
+
+    display: block;
+
+}
+
+
+/* ============================================================
+   GRAND IMAGE
+   ============================================================ */
+
+.grand-wedding-image {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    object-position: center;
+
+    opacity: 0;
+
+    transform:
+        scale(1.08);
+
+    filter:
+        saturate(1.15)
+        contrast(1.05)
+        brightness(.90);
+
+    animation:
+        grandWeddingImageReveal
+        2.2s
+        cubic-bezier(.16, 1, .3, 1)
+        forwards;
+
+}
+
+
+@keyframes grandWeddingImageReveal {
+
+    0% {
+
+        opacity: 0;
+
+        transform:
+            scale(1.08);
+
+    }
+
+    100% {
+
+        opacity: 1;
+
+        transform:
+            scale(1);
+
+    }
+
+}
+
+
+/* ============================================================
+   GRAND IMAGE OVERLAY
+   ============================================================ */
+
+.grand-wedding-overlay {
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 2;
+
+    pointer-events: none;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(0, 0, 0, .04),
+            rgba(0, 0, 0, .08) 35%,
+            rgba(0, 0, 0, .48) 75%,
+            rgba(0, 0, 0, .72) 100%
+        );
+
+}
+
+
+/* ============================================================
+   GOLDEN LIGHT
+   ============================================================ */
+
+.grand-wedding-scene::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: -20%;
+
+    z-index: 3;
+
+    pointer-events: none;
+
+    background:
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(255, 211, 104, .22),
+            transparent 32%
+        );
+
+    opacity: 0;
+
+    animation:
+        grandWeddingLight
+        4s
+        ease-out
+        forwards;
+
+}
+
+
+@keyframes grandWeddingLight {
+
+    0% {
+
+        opacity: 0;
+
+        transform:
+            scale(.5);
+
+    }
+
+    35% {
+
+        opacity: 1;
+
+    }
+
+    100% {
+
+        opacity: .25;
+
+        transform:
+            scale(1.5);
+
+    }
+
+}
+
+
+/* ============================================================
+   GRAND PARTICLES
+   ============================================================ */
+
+.grand-scene-particles {
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 5;
+
+    pointer-events: none;
+
+}
+
+
+.grand-scene-particle {
+
+    position: absolute;
+
+    width: 3px;
+
+    height: 3px;
+
+    border-radius: 50%;
+
+    background:
+        #f4d58a;
+
+    box-shadow:
+        0 0 8px #f4d58a,
+        0 0 15px rgba(244, 213, 138, .5);
+
+    opacity: 0;
+
+    animation:
+        grandParticleFloat
+        var(--grand-duration)
+        ease-in-out
+        var(--grand-delay)
+        infinite;
+
+}
+
+
+@keyframes grandParticleFloat {
+
+    0% {
+
+        opacity: 0;
+
+        transform:
+            translate3d(
+                0,
+                30px,
+                0
+            );
+
+    }
+
+    25% {
+
+        opacity: .9;
+
+    }
+
+    70% {
+
+        opacity: .7;
+
+    }
+
+    100% {
+
+        opacity: 0;
+
+        transform:
+            translate3d(
+                var(--grand-x),
+                -180px,
+                0
+            );
+
+    }
+
+}
+
+
+/* ============================================================
+   GRAND SCENE TEXT
+   ============================================================ */
+
+.grand-scene-content {
+
+    position: absolute;
+
+    left: 50%;
+
+    bottom: 15%;
+
+    width: 90%;
+
+    transform:
+        translateX(-50%);
+
+    z-index: 8;
+
+    text-align: center;
+
+    color:
+        #f7dfaa;
+
+    pointer-events: none;
+
+    animation:
+        grandSceneContentReveal
+        1.8s
+        .5s
+        ease
+        forwards;
+
+    opacity: 0;
+
+}
+
+
+@keyframes grandSceneContentReveal {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateX(-50%)
+            translateY(25px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateX(-50%)
+            translateY(0);
+
+    }
+
+}
+
+
+.grand-scene-symbol {
+
+    margin-bottom: 15px;
+
+    color:
+        #f0cb78;
+
+    font-size: 28px;
+
+    animation:
+        grandSymbolGlow
+        2s
+        ease-in-out
+        infinite alternate;
+
+}
+
+
+@keyframes grandSymbolGlow {
+
+    from {
+
+        opacity: .55;
+
+        transform:
+            scale(.95);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            scale(1.08);
+
+    }
+
+}
+
+
+.grand-scene-content p {
+
+    margin:
+        0 0 10px;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 10px;
+
+    letter-spacing: 5px;
+
+}
+
+
+.grand-scene-content span {
+
+    display: block;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        clamp(
+            28px,
+            5vw,
+            55px
+        );
+
+    letter-spacing: 3px;
+
+}
+
+
+/* ============================================================
+   SCROLL INDICATOR
+   ============================================================ */
+
+.grand-scroll-indicator {
+
+    position: absolute;
+
+    left: 50%;
+
+    bottom: 30px;
+
+    transform:
+        translateX(-50%);
+
+    z-index: 10;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 10px;
+
+    color:
+        #f4d58a;
+
+    pointer-events: none;
+
+}
+
+
+.grand-scroll-indicator span {
+
+    font-size: 8px;
+
+    letter-spacing: 3px;
+
+}
+
+
+.grand-scroll-line {
+
+    width: 1px;
+
+    height: 40px;
+
+    background:
+        rgba(
+            244,
+            213,
+            138,
+            .30
+        );
+
+    overflow: hidden;
+
+}
+
+
+.grand-scroll-line i {
+
+    display: block;
+
+    width: 100%;
+
+    height: 50%;
+
+    background:
+        #f4d58a;
+
+    animation:
+        grandScrollLine
+        1.5s
+        ease-in-out
+        infinite;
+
+}
+
+
+@keyframes grandScrollLine {
+
+    0% {
+
+        transform:
+            translateY(-100%);
+
+    }
+
+    100% {
+
+        transform:
+            translateY(200%);
+
+    }
+
+}
+
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
 
 @media (max-width: 768px) {
 
-    .opening-video {
-        transform: scale(1.12);
+
+    /* -----------------------------------------
+       DIYA
+    ------------------------------------------ */
+
+    .diya-opening {
+
+        min-height: 100svh;
+
+        height: 100svh;
+
     }
 
-    .tap-button {
-        width: 80%;
-        max-width: 280px;
 
-        padding: 12px 0;
+    .diya-intro {
+
+        top: 13%;
+
+        width: 92%;
+
+    }
+
+
+    .diya-top-symbol {
+
+        font-size: 17px;
+
+    }
+
+
+    .diya-intro-small {
+
+        font-size: 7px;
+
+        letter-spacing: 3px;
+
+    }
+
+
+    .diya-intro-blessing {
 
         font-size: 16px;
 
-        bottom: 40px;
+    }
+
+
+    .diya-instruction {
+
+        font-size: 8px;
+
+        letter-spacing: 3px;
+
+    }
+
+
+    .diya-instruction-sub {
+
+        font-size: 9px;
+
+    }
+
+
+    .diya-holder {
+
+        width: 210px;
+
+        height: 205px;
+
+        top: 53%;
+
+    }
+
+
+    .diya-names {
+
+        flex-direction: column;
+
+        gap: 2px;
+
+        font-size: 43px;
+
+        line-height: .95;
+
+    }
+
+
+    .diya-names b {
+
+        font-size: 20px;
+
+    }
+
+
+    .diya-reveal {
+
+        width: 92vw;
+
+        top: 50%;
+
+    }
+
+
+    .diya-family {
+
+        font-size: 7px;
+
+        letter-spacing: 2.5px;
+
+    }
+
+
+    .diya-gold-divider span {
+
+        width: 45px;
+
+    }
+
+
+    .diya-tagline {
+
+        font-size: 7px;
+
+        letter-spacing: 2px;
+
+    }
+
+
+    .diya-date {
+
+        font-size: 8px;
+
+    }
+
+
+    .diya-enter {
+
+        margin-top: 24px;
+
+        padding:
+            12px 18px;
+
+        font-size: 8px;
+
+        letter-spacing: 2px;
+
+    }
+
+
+    .diya-bottom {
+
+        bottom: 15px;
+
+    }
+
+
+    /* -----------------------------------------
+       GRAND IMAGE
+    ------------------------------------------ */
+
+    .grand-wedding-scene {
+
+        height: 100svh;
+
+        min-height: 550px;
+
+    }
+
+
+    .grand-wedding-image {
+
+        object-fit: cover;
+
+        object-position: center;
+
+    }
+
+
+    .grand-scene-content {
+
+        bottom: 17%;
+
+    }
+
+
+    .grand-scene-content p {
+
+        font-size: 8px;
+
+        letter-spacing: 3px;
+
+    }
+
+
+    .grand-scene-content span {
+
+        font-size: 28px;
+
+        letter-spacing: 2px;
+
+    }
+
+
+    .grand-scene-symbol {
+
+        font-size: 22px;
+
+    }
+
+
+    .grand-scroll-indicator {
+
+        bottom: 24px;
+
+    }
+
+
+    .grand-scroll-indicator span {
+
+        font-size: 7px;
+
+        letter-spacing: 2px;
+
     }
 
 }
+
+
+/* ============================================================
+   VERY SMALL MOBILE
+   ============================================================ */
+
+@media (max-width: 380px) {
+
+    .diya-intro {
+
+        top: 10%;
+
+    }
+
+
+    .diya-holder {
+
+        transform:
+            translate(-50%, -50%)
+            scale(.88);
+
+    }
+
+
+    .diya-holder:hover {
+
+        transform:
+            translate(-50%, -50%)
+            scale(.88);
+
+    }
+
+
+    .diya-names {
+
+        font-size: 37px;
+
+    }
+
+
+    .diya-family {
+
+        font-size: 6px;
+
+        letter-spacing: 2px;
+
+    }
+
+
+    .diya-enter {
+
+        padding:
+            11px 15px;
+
+    }
+
+
+    .grand-scene-content span {
+
+        font-size: 24px;
+
+    }
+
+}
+
+
+/* ============================================================
+   ACCESSIBILITY
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .diya-particle,
+    .grand-scene-particle,
+    .diya-flame,
+    .grand-scene-symbol,
+    .grand-scroll-line i {
+
+        animation:
+            none !important;
+
+    }
+
+    .grand-wedding-image {
+
+        animation:
+            none !important;
+
+        opacity: 1;
+
+        transform:
+            scale(1);
+
+    }
+
+    .grand-scene-content {
+
+        animation:
+            none !important;
+
+        opacity: 1;
+
+    }
+
+}
+/* =========================================================
+   FINAL DIYA POSITION FIX
+   ========================================================= */
+
+/* Keep the diya safely inside the viewport */
+.diya-opening .diya-holder {
+    position: absolute !important;
+
+    /* Desktop position */
+    right: clamp(30px, 5vw, 80px);
+    bottom: clamp(45px, 8vh, 90px);
+
+    width: 220px;
+    height: 210px;
+
+    margin: 0 !important;
+
+    /* IMPORTANT: do not move when cursor comes over it */
+    transform: none !important;
+
+    transition: none !important;
+
+    cursor: pointer;
+    z-index: 50;
+
+    /* Never allow it to cause horizontal overflow */
+    max-width: 220px;
+}
+
+/* Disable the old hover movement completely */
+.diya-opening .diya-holder:hover {
+    transform: none !important;
+}
+
+/* Also disable hover movement on child elements */
+.diya-opening .diya-holder:active {
+    transform: none !important;
+}
+
+/* Keep the entire opening scene inside the viewport */
+.diya-opening {
+    width: 100%;
+    max-width: 100vw;
+    overflow: hidden !important;
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    .diya-opening .diya-holder {
+        right: 50%;
+        bottom: 55px;
+
+        transform: translateX(50%) !important;
+
+        width: 180px;
+        height: 175px;
+    }
+
+    .diya-opening .diya-holder:hover,
+    .diya-opening .diya-holder:active {
+        transform: translateX(50%) !important;
+    }
+}
+/* =========================================================
+   HAPPY WEDDING TRANSITION
+   AFTER DIYA IS CLICKED
+   ========================================================= */
+
+/*
+   The initial screen remains dark.
+
+   After clicking the diya:
+   - background becomes vibrant wedding colours
+   - diya moves to the centre
+   - text remains above the diya
+   - diya never overlaps the invitation text
+*/
+
+.diya-opening.is-lit {
+
+    background:
+        radial-gradient(
+            circle at 50% 45%,
+            #d94f73 0%,
+            #b52f5b 25%,
+            #7d1f46 52%,
+            #4b102d 78%,
+            #240817 100%
+        ) !important;
+
+    transition:
+        background 1.8s
+        cubic-bezier(.16, 1, .3, 1);
+}
+
+
+/* =========================================================
+   EXTRA WARM GLOW
+   ========================================================= */
+
+.diya-opening.is-lit::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 1;
+
+    pointer-events: none;
+
+    background:
+        radial-gradient(
+            circle at 50% 42%,
+            rgba(255, 214, 130, .28),
+            transparent 32%
+        ),
+        radial-gradient(
+            circle at 20% 80%,
+            rgba(255, 105, 160, .18),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 80% 20%,
+            rgba(255, 196, 91, .16),
+            transparent 28%
+        );
+
+    opacity: 0;
+
+    animation:
+        weddingGlowAppear
+        1.5s
+        ease
+        forwards;
+}
+
+
+@keyframes weddingGlowAppear {
+
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+
+/* =========================================================
+   MOVE DIYA TO CENTER
+   ========================================================= */
+
+.diya-opening.is-lit .diya-holder {
+
+    position: absolute !important;
+
+    left: 50% !important;
+    right: auto !important;
+
+    /*
+       Put the diya BELOW the text.
+    */
+
+    top: 64% !important;
+    bottom: auto !important;
+
+    width: 220px;
+    height: 210px;
+
+    /*
+       Center horizontally.
+    */
+
+    transform:
+        translate(-50%, -50%)
+        scale(1) !important;
+
+    z-index: 40;
+
+    pointer-events: none !important;
+
+    transition:
+        top 1.5s
+        cubic-bezier(.16, 1, .3, 1),
+        left 1.5s
+        cubic-bezier(.16, 1, .3, 1),
+        opacity 1s ease;
+}
+
+
+/* =========================================================
+   KEEP DIYA CENTRED AFTER REVEAL
+   ========================================================= */
+
+.diya-opening.is-revealed .diya-holder {
+
+    left: 50% !important;
+    right: auto !important;
+
+    top: 64% !important;
+    bottom: auto !important;
+
+    transform:
+        translate(-50%, -50%)
+        scale(1) !important;
+
+    opacity: 1 !important;
+
+    pointer-events: none !important;
+}
+
+
+/* =========================================================
+   DIYA GLOW BECOMES MORE FESTIVE
+   ========================================================= */
+
+.diya-opening.is-lit .diya-flame-glow {
+
+    transform:
+        translateX(-50%)
+        scale(2.8) !important;
+
+    opacity: 1 !important;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255, 236, 157, .9),
+            rgba(255, 166, 65, .45) 35%,
+            rgba(255, 75, 120, .18) 55%,
+            transparent 75%
+        );
+
+    filter: blur(22px);
+}
+
+
+/* =========================================================
+   INVITATION TEXT
+   KEEP IT ABOVE DIYA
+   ========================================================= */
+
+.diya-opening.is-revealed .diya-reveal {
+
+    /*
+       Move the invitation slightly upward.
+       This creates a dedicated gap between text and diya.
+    */
+
+    top: 36% !important;
+
+    left: 50% !important;
+
+    transform:
+        translate(-50%, -50%)
+        scale(1) !important;
+
+    width: min(760px, 90vw);
+
+    z-index: 60;
+
+    opacity: 1;
+
+    pointer-events: auto;
+}
+
+
+/* =========================================================
+   NAMES
+   ========================================================= */
+
+.diya-opening.is-revealed .diya-names {
+
+    color: #fff1cf;
+
+    text-shadow:
+        0 3px 20px rgba(66, 8, 31, .55),
+        0 0 30px rgba(255, 220, 145, .18);
+}
+
+
+/* =========================================================
+   GOLD DIVIDER
+   ========================================================= */
+
+.diya-opening.is-revealed .diya-gold-divider span {
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #ffd985
+        );
+}
+
+.diya-opening.is-revealed .diya-gold-divider span:last-child {
+
+    background:
+        linear-gradient(
+            90deg,
+            #ffd985,
+            transparent
+        );
+}
+
+
+/* =========================================================
+   BUTTON
+   ========================================================= */
+
+.diya-opening.is-revealed .diya-enter {
+
+    border-color:
+        rgba(255, 220, 150, .75);
+
+    background:
+        rgba(74, 11, 39, .42);
+
+    box-shadow:
+        0 8px 35px
+        rgba(255, 193, 91, .18);
+
+    color: #ffe7b0;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    .diya-opening.is-lit .diya-holder,
+    .diya-opening.is-revealed .diya-holder {
+
+        left: 50% !important;
+        right: auto !important;
+
+        top: 68% !important;
+
+        width: 180px;
+        height: 175px;
+
+        transform:
+            translate(-50%, -50%)
+            scale(.9) !important;
+    }
+
+
+    .diya-opening.is-revealed .diya-reveal {
+
+        top: 34% !important;
+
+        width: 92vw;
+
+        transform:
+            translate(-50%, -50%)
+            scale(.9) !important;
+    }
+
+
+    .diya-opening.is-revealed .diya-names {
+
+        font-size: 40px;
+    }
+}
+
+
+/* =========================================================
+   SMALL LAPTOP / SHORT SCREEN
+   ========================================================= */
+
+@media (max-height: 700px) and (min-width: 769px) {
+
+    .diya-opening.is-lit .diya-holder,
+    .diya-opening.is-revealed .diya-holder {
+
+        top: 70% !important;
+
+        transform:
+            translate(-50%, -50%)
+            scale(.82) !important;
+    }
+
+
+    .diya-opening.is-revealed .diya-reveal {
+
+        top: 32% !important;
+
+        transform:
+            translate(-50%, -50%)
+            scale(.82) !important;
+    }
+}
+/* =========================================================
+   FINAL DIYA DESIGN
+   Elegant + Vibrant + High Contrast
+   ========================================================= */
+
+
+/* =========================================================
+   1. INITIAL STATE
+   DIYA ALWAYS STARTS IN THE CENTRE
+   ========================================================= */
+
+.diya-opening .diya-holder {
+
+    position: absolute !important;
+
+    left: 50% !important;
+    right: auto !important;
+
+    top: 58% !important;
+    bottom: auto !important;
+
+    width: 220px;
+    height: 210px;
+
+    margin: 0 !important;
+
+    transform:
+        translate(-50%, -50%)
+        scale(1) !important;
+
+    z-index: 40;
+
+    pointer-events: auto !important;
+
+    transition:
+        top 1.5s cubic-bezier(.16, 1, .3, 1),
+        transform 1.5s cubic-bezier(.16, 1, .3, 1),
+        opacity 1s ease;
+}
+
+
+/*
+   Absolutely no movement when mouse enters diya.
+*/
+
+.diya-opening .diya-holder:hover {
+
+    transform:
+        translate(-50%, -50%)
+        scale(1) !important;
+}
+
+
+/* =========================================================
+   2. INITIAL BACKGROUND
+   ========================================================= */
+
+.diya-opening {
+
+    background:
+
+        radial-gradient(
+            circle at 50% 55%,
+            rgba(103, 42, 51, .45),
+            transparent 30%
+        ),
+
+        radial-gradient(
+            circle at 50% 50%,
+            #24121b 0%,
+            #110a12 50%,
+            #050507 100%
+        ) !important;
+
+    transition:
+        background 1.8s
+        cubic-bezier(.16, 1, .3, 1);
+}
+
+
+/* =========================================================
+   3. AFTER CLICK
+   RICH WEDDING BACKGROUND
+   ========================================================= */
+
+.diya-opening.is-lit {
+
+    background:
+
+        /*
+           Soft golden centre
+        */
+        radial-gradient(
+            circle at 50% 54%,
+            rgba(255, 187, 87, .16) 0%,
+            rgba(255, 130, 74, .08) 18%,
+            transparent 38%
+        ),
+
+        /*
+           Burgundy glow
+        */
+        radial-gradient(
+            circle at 50% 40%,
+            #67233d 0%,
+            #42162d 38%,
+            #270f20 68%,
+            #100711 100%
+        ) !important;
+
+    transition:
+        background 1.8s
+        cubic-bezier(.16, 1, .3, 1);
+}
+
+
+/* =========================================================
+   4. SUBTLE GOLDEN LIGHT
+   ========================================================= */
+
+.diya-opening.is-lit::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 3;
+
+    pointer-events: none;
+
+    background:
+
+        radial-gradient(
+            ellipse at 50% 62%,
+            rgba(255, 206, 122, .16),
+            transparent 28%
+        ),
+
+        radial-gradient(
+            ellipse at 50% 50%,
+            rgba(255, 154, 83, .08),
+            transparent 45%
+        );
+
+    opacity: 0;
+
+    animation:
+        elegantWeddingGlow
+        1.8s
+        ease
+        forwards;
+}
+
+
+@keyframes elegantWeddingGlow {
+
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+
+/* =========================================================
+   5. DIYA AFTER CLICK
+   MOVE SLIGHTLY DOWN
+   ========================================================= */
+
+.diya-opening.is-lit .diya-holder {
+
+    left: 50% !important;
+    right: auto !important;
+
+    top: 67% !important;
+    bottom: auto !important;
+
+    transform:
+        translate(-50%, -50%)
+        scale(1) !important;
+
+    z-index: 45;
+
+    pointer-events: none !important;
+
+    transition:
+        top 1.5s
+        cubic-bezier(.16, 1, .3, 1),
+        transform 1.5s
+        cubic-bezier(.16, 1, .3, 1);
+}
+
+
+/* =========================================================
+   6. KEEP DIYA THERE AFTER REVEAL
+   ========================================================= */
+
+.diya-opening.is-revealed .diya-holder {
+
+    left: 50% !important;
+    right: auto !important;
+
+    top: 67% !important;
+    bottom: auto !important;
+
+    transform:
+        translate(-50%, -50%)
+        scale(1) !important;
+
+    opacity: 1 !important;
+
+    pointer-events: none !important;
+}
+
+
+/* =========================================================
+   7. DIYA GLOW
+   ========================================================= */
+
+.diya-opening.is-lit .diya-flame-glow {
+
+    transform:
+        translateX(-50%)
+        scale(2.6) !important;
+
+    opacity: 1 !important;
+
+    background:
+
+        radial-gradient(
+            circle,
+            rgba(255, 244, 183, .95) 0%,
+            rgba(255, 193, 76, .55) 25%,
+            rgba(255, 124, 45, .20) 50%,
+            transparent 75%
+        );
+
+    filter: blur(20px);
+
+}
+
+
+/* =========================================================
+   8. INVITATION CONTENT
+   KEEP CLEARLY ABOVE DIYA
+   ========================================================= */
+
+.diya-opening.is-revealed .diya-reveal {
+
+    position: absolute !important;
+
+    left: 50% !important;
+
+    /*
+       Text area above diya
+    */
+
+    top: 32% !important;
+
+    width: min(760px, 90vw);
+
+    transform:
+        translate(-50%, -50%)
+        scale(1) !important;
+
+    z-index: 70;
+
+    opacity: 1;
+
+    pointer-events: auto;
+}
+
+
+/* =========================================================
+   9. BLESSING
+   ========================================================= */
+
+.diya-opening.is-revealed .diya-blessing {
+
+    color: #ffe7ae;
+
+    text-shadow:
+        0 2px 12px rgba(0, 0, 0, .55),
+        0 0 20px rgba(255, 199, 104, .12);
+}
+
+
+/* =========================================================
+   10. NAMES
+   ========================================================= */
+
+.diya-opening.is-revealed .diya-names {
+
+    color: #fff0c9;
+
+    text-shadow:
+        0 3px 18px rgba(0, 0, 0, .65),
+        0 0 30px rgba(255, 207, 125, .12);
+}
+
+
+/* '&' symbol */
+
+.diya-opening.is-revealed .diya-names b {
+
+    color: #f3c66f;
+
+    text-shadow:
+        0 0 15px rgba(243, 198, 111, .4);
+}
+
+
+/* =========================================================
+   11. FAMILY / TAGLINE
+   ========================================================= */
+
+.diya-opening.is-revealed .diya-family,
+.diya-opening.is-revealed .diya-tagline {
+
+    color: #e7c17d;
+
+    text-shadow:
+        0 2px 10px rgba(0, 0, 0, .6);
+}
+
+
+/* =========================================================
+   12. GOLD DIVIDER
+   ========================================================= */
+
+.diya-opening.is-revealed .diya-gold-divider span {
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #eac06c
+        );
+}
+
+
+.diya-opening.is-revealed
+.diya-gold-divider span:last-child {
+
+    background:
+        linear-gradient(
+            90deg,
+            #eac06c,
+            transparent
+        );
+}
+
+
+.diya-opening.is-revealed
+.diya-gold-divider b {
+
+    color: #f5cb78;
+
+    text-shadow:
+        0 0 12px rgba(245, 203, 120, .3);
+}
+
+
+/* =========================================================
+   13. ENTER BUTTON
+   ========================================================= */
+
+.diya-opening.is-revealed .diya-enter {
+
+    border:
+        1px solid rgba(241, 199, 111, .65);
+
+    background:
+        rgba(36, 9, 24, .65);
+
+    color:
+        #ffe6a9;
+
+    box-shadow:
+        0 8px 30px
+        rgba(0, 0, 0, .25);
+
+    backdrop-filter:
+        blur(8px);
+}
+
+
+.diya-opening.is-revealed
+.diya-enter:hover {
+
+    background:
+        rgba(93, 29, 51, .8);
+
+    border-color:
+        rgba(255, 220, 145, .9);
+
+    box-shadow:
+        0 10px 35px
+        rgba(255, 190, 85, .15);
+
+    transform:
+        translateY(-3px);
+}
+
+
+/* =========================================================
+   14. TOP INTRO
+   MAKE INITIAL WORDS CLEAR
+   ========================================================= */
+
+.diya-intro {
+
+    z-index: 60;
+
+    text-shadow:
+        0 2px 15px rgba(0, 0, 0, .75);
+}
+
+
+.diya-intro-small {
+
+    color: #dcb06b;
+}
+
+
+.diya-intro-blessing {
+
+    color: #f1d18d;
+
+    text-shadow:
+        0 2px 15px rgba(0, 0, 0, .7);
+}
+
+
+.diya-instruction {
+
+    color: #f5dca4;
+
+    text-shadow:
+        0 2px 12px rgba(0, 0, 0, .7);
+}
+
+
+.diya-instruction-sub {
+
+    color:
+        rgba(239, 211, 163, .75);
+}
+
+
+/* =========================================================
+   15. MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    /*
+       Initial diya
+    */
+
+    .diya-opening .diya-holder {
+
+        left: 50% !important;
+        right: auto !important;
+
+        top: 58% !important;
+
+        transform:
+            translate(-50%, -50%)
+            scale(.88) !important;
+    }
+
+
+    /*
+       After click
+    */
+
+    .diya-opening.is-lit .diya-holder,
+    .diya-opening.is-revealed .diya-holder {
+
+        left: 50% !important;
+        right: auto !important;
+
+        top: 70% !important;
+
+        transform:
+            translate(-50%, -50%)
+            scale(.82) !important;
+    }
+
+
+    /*
+       Text
+    */
+
+    .diya-opening.is-revealed .diya-reveal {
+
+        top: 30% !important;
+
+        width: 92vw;
+
+        transform:
+            translate(-50%, -50%)
+            scale(.88) !important;
+    }
+}
+
+
+/* =========================================================
+   16. SHORT LAPTOP SCREEN
+   ========================================================= */
+
+@media (max-height: 700px) and (min-width: 769px) {
+
+    .diya-opening .diya-holder {
+
+        top: 57% !important;
+
+        transform:
+            translate(-50%, -50%)
+            scale(.82) !important;
+    }
+
+
+    .diya-opening.is-lit .diya-holder,
+    .diya-opening.is-revealed .diya-holder {
+
+        top: 69% !important;
+
+        transform:
+            translate(-50%, -50%)
+            scale(.78) !important;
+    }
+
+
+    .diya-opening.is-revealed .diya-reveal {
+
+        top: 29% !important;
+
+        transform:
+            translate(-50%, -50%)
+            scale(.82) !important;
+    }
+}
+/* =========================================================
+   FIX DIYA OIL
+   ========================================================= */
+
+.diya-opening .diya-oil {
+
+    left: 10px !important;
+    right: 10px !important;
+
+    top: 6px !important;
+
+    width: auto !important;
+    height: 10px !important;
+
+    border-radius: 50% !important;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            #8b542b 0%,
+            #5a291b 55%,
+            #35120f 100%
+        ) !important;
+
+    box-shadow:
+        inset 0 2px 3px rgba(255, 207, 119, .18),
+        0 1px 4px rgba(0, 0, 0, .35);
+
+    transform: none !important;
+
+    z-index: 3;
+}
+/* =========================================================
+   DIYA — MAKE IT OBVIOUSLY INTERACTIVE
+   ========================================================= */
+
+.diya-opening .diya-holder {
+
+    cursor: pointer;
+
+}
+
+
+/* Golden interactive glow */
+
+.diya-opening .diya-holder::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: 270px;
+    height: 270px;
+
+    transform:
+        translate(-50%, -50%);
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255, 205, 105, .20),
+            rgba(255, 154, 65, .08) 35%,
+            transparent 70%
+        );
+
+    opacity: .55;
+
+    pointer-events: none;
+
+    z-index: -1;
+
+    animation:
+        diyaInteractiveGlow
+        2.4s
+        ease-in-out
+        infinite;
+}
+
+
+@keyframes diyaInteractiveGlow {
+
+    0%,
+    100% {
+        transform:
+            translate(-50%, -50%)
+            scale(.88);
+
+        opacity: .35;
+    }
+
+    50% {
+        transform:
+            translate(-50%, -50%)
+            scale(1.08);
+
+        opacity: .75;
+    }
+}
+
+
+/* =========================================================
+   HOVER — VERY SUBTLE
+   ========================================================= */
+
+.diya-opening .diya-holder:hover {
+
+    transform:
+        translate(-50%, -50%)
+        scale(1.04) !important;
+
+}
+
+
+/* =========================================================
+   CLICK INSTRUCTION
+   ========================================================= */
+
+.diya-click-hint {
+
+    position: absolute;
+
+    left: 50%;
+
+    /*
+       Put instruction BELOW the diya
+    */
+
+    top: 76%;
+
+    transform:
+        translateX(-50%);
+
+    z-index: 80;
+
+    text-align: center;
+
+    pointer-events: none;
+
+    white-space: nowrap;
+}
+
+
+.diya-click-hint-main {
+
+    display: block;
+
+    color: #f6d58d;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    letter-spacing: 4px;
+
+    text-transform: uppercase;
+
+    text-shadow:
+        0 2px 12px rgba(0, 0, 0, .8);
+
+    animation:
+        clickHintPulse
+        2s
+        ease-in-out
+        infinite;
+}
+
+
+.diya-click-hint-sub {
+
+    display: block;
+
+    margin-top: 8px;
+
+    color:
+        rgba(244, 216, 165, .72);
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+
+    font-style: italic;
+}
+
+
+@keyframes clickHintPulse {
+
+    0%,
+    100% {
+        opacity: .65;
+        transform: translateY(0);
+    }
+
+    50% {
+        opacity: 1;
+        transform: translateY(-3px);
+    }
+}
+.diya-click-hint {
+    top: 78%;
+}
+@media (max-width: 768px) {
+
+    .diya-click-hint {
+        top: 82%;
+    }
+
+    .diya-click-hint-main {
+        font-size: 10px;
+        letter-spacing: 3px;
+    }
+
+    .diya-click-hint-sub {
+        font-size: 8px;
+    }
+}
+/* =========================================================
+   FINAL OPENING SCREEN LAYOUT
+   ========================================================= */
+
+/* ---------- INITIAL DIYA ---------- */
+
+.diya-opening .diya-holder {
+
+    position: absolute !important;
+
+    left: 50% !important;
+    right: auto !important;
+
+    /* Lower than the text */
+    top: 64% !important;
+    bottom: auto !important;
+
+    width: 190px !important;
+    height: 185px !important;
+
+    margin: 0 !important;
+
+    transform:
+        translate(-50%, -50%) !important;
+
+    z-index: 40;
+
+    cursor: pointer;
+
+    transition:
+        top 1.3s cubic-bezier(.16,1,.3,1),
+        transform 1.3s cubic-bezier(.16,1,.3,1);
+}
+
+
+/* Don't let the mouse throw the diya around */
+
+.diya-opening .diya-holder:hover {
+
+    transform:
+        translate(-50%, -50%)
+        scale(1.04) !important;
+}
+
+
+/* ---------- INTRO TEXT ---------- */
+
+.diya-opening .diya-intro {
+
+    top: 13% !important;
+
+    z-index: 70;
+
+    width: 90%;
+
+    text-align: center;
+}
+
+
+/* ---------- KEEP THE "LIGHT THE FLAME" TEXT ABOVE DIYA ---------- */
+
+.diya-opening .diya-instruction {
+
+    margin-top: 0;
+
+    color: #f3d394;
+
+    text-shadow:
+        0 2px 12px rgba(0,0,0,.8);
+}
+
+
+.diya-opening .diya-instruction-sub {
+
+    color:
+        rgba(245,220,175,.72);
+}
+
+
+/* =========================================================
+   TAP THE DIYA INDICATOR
+   ========================================================= */
+
+.diya-click-hint {
+
+    position: absolute;
+
+    left: 50%;
+
+    /*
+       Clearly BELOW the diya
+    */
+
+    top: 78%;
+
+    transform:
+        translateX(-50%);
+
+    z-index: 80;
+
+    text-align: center;
+
+    pointer-events: none;
+
+    width: max-content;
+
+}
+
+
+/* Main instruction */
+
+.diya-click-hint-main {
+
+    display: block;
+
+    color: #f6d58d;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    letter-spacing: 4px;
+
+    text-shadow:
+        0 2px 12px rgba(0,0,0,.85);
+
+    animation:
+        diyaHintPulse
+        2s
+        ease-in-out
+        infinite;
+}
+
+
+/* Small instruction */
+
+.diya-click-hint-sub {
+
+    display: block;
+
+    margin-top: 7px;
+
+    color:
+        rgba(245,220,175,.7);
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+
+    font-style: italic;
+}
+
+
+/* =========================================================
+   ANIMATED HINT
+   ========================================================= */
+
+@keyframes diyaHintPulse {
+
+    0%,
+    100% {
+
+        opacity: .55;
+
+        transform:
+            translateY(0);
+    }
+
+    50% {
+
+        opacity: 1;
+
+        transform:
+            translateY(-3px);
+    }
+}
+
+
+/* =========================================================
+   GOLDEN RING AROUND DIYA
+   ========================================================= */
+
+.diya-opening .diya-holder::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+    top: 52%;
+
+    width: 230px;
+    height: 230px;
+
+    transform:
+        translate(-50%, -50%);
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,205,110,.16),
+            rgba(255,160,60,.07) 42%,
+            transparent 70%
+        );
+
+    pointer-events: none;
+
+    z-index: -1;
+
+    animation:
+        diyaAura
+        2.8s
+        ease-in-out
+        infinite;
+}
+
+
+@keyframes diyaAura {
+
+    0%,
+    100% {
+
+        transform:
+            translate(-50%, -50%)
+            scale(.9);
+
+        opacity: .45;
+    }
+
+    50% {
+
+        transform:
+            translate(-50%, -50%)
+            scale(1.08);
+
+        opacity: .85;
+    }
+}
+
+
+/* =========================================================
+   FIX THE OIL
+   ========================================================= */
+
+.diya-opening .diya-oil {
+
+    left: 15px !important;
+
+    right: 15px !important;
+
+    top: 6px !important;
+
+    height: 7px !important;
+
+    border-radius: 50% !important;
+
+    background:
+        radial-gradient(
+            ellipse,
+            #70402a 0%,
+            #432018 65%,
+            #28100e 100%
+        ) !important;
+
+    box-shadow:
+        inset 0 1px 2px
+        rgba(255,220,140,.15);
+
+}
+
+
+/* =========================================================
+   AFTER CLICK
+   ========================================================= */
+
+.diya-opening.is-lit .diya-holder {
+
+    left: 50% !important;
+
+    right: auto !important;
+
+    top: 70% !important;
+
+    transform:
+        translate(-50%, -50%)
+        scale(.95) !important;
+
+    pointer-events: none !important;
+}
+
+
+/* =========================================================
+   HIDE CLICK MESSAGE AFTER CLICK
+   ========================================================= */
+
+.diya-opening.is-lit .diya-click-hint {
+
+    opacity: 0;
+
+    transform:
+        translate(-50%, 10px);
+
+    transition:
+        opacity .6s ease,
+        transform .6s ease;
+}
+
+
+/* =========================================================
+   REVEALED INVITATION
+   ========================================================= */
+
+.diya-opening.is-revealed .diya-reveal {
+
+    left: 50% !important;
+
+    top: 32% !important;
+
+    transform:
+        translate(-50%, -50%)
+        scale(1) !important;
+
+    z-index: 70;
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    .diya-opening .diya-holder {
+
+        left: 50% !important;
+
+        top: 61% !important;
+
+        width: 165px !important;
+        height: 160px !important;
+
+        transform:
+            translate(-50%, -50%) !important;
+    }
+
+
+    .diya-opening .diya-holder:hover {
+
+        transform:
+            translate(-50%, -50%)
+            scale(1.03) !important;
+    }
+
+
+    .diya-click-hint {
+
+        top: 77%;
+
+    }
+
+
+    .diya-click-hint-main {
+
+        font-size: 9px;
+
+        letter-spacing: 3px;
+
+    }
+
+
+    .diya-click-hint-sub {
+
+        font-size: 7px;
+
+        letter-spacing: 1.5px;
+
+    }
+
+
+    .diya-opening.is-lit .diya-holder {
+
+        top: 71% !important;
+
+        transform:
+            translate(-50%, -50%)
+            scale(.85) !important;
+    }
+
+
+    .diya-opening.is-revealed .diya-reveal {
+
+        top: 30% !important;
+
+        width: 92vw;
+
+    }
+
+}
+/* =========================================================
+   REMOVE DECORATIVE PLATE
+   ========================================================= */
+
+.diya-opening .diya-plate {
+    display: none !important;
+}
+
+
+/* =========================================================
+   POSITION TAP MESSAGE BELOW DIYA
+   ========================================================= */
+
+.diya-opening .diya-click-hint {
+
+    top: 76% !important;
+
+    left: 50% !important;
+
+    transform:
+        translateX(-50%) !important;
+
+    width: max-content;
+
+    z-index: 90;
+}
+
+
+/* Main text */
+
+.diya-opening .diya-click-hint-main {
+
+    display: block;
+
+    color: #f3cf83;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    letter-spacing: 4px;
+
+    text-shadow:
+        0 2px 12px rgba(0,0,0,.8);
+}
+
+
+/* Small text */
+
+.diya-opening .diya-click-hint-sub {
+
+    display: block;
+
+    margin-top: 7px;
+
+    color:
+        rgba(242,216,168,.75);
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+
+    font-style: italic;
+}
+/* =========================================================
+   FINAL REVEAL LAYOUT FIX
+   Keep ENTER button away from diya
+   ========================================================= */
+
+
+/* -----------------------------------------
+   REVEALED CONTENT
+   ----------------------------------------- */
+
+.diya-opening.is-revealed .diya-reveal {
+
+    position: absolute !important;
+
+    left: 50% !important;
+
+    /*
+       Move the entire invitation content upward.
+    */
+
+    top: 27% !important;
+
+    width: min(900px, 92vw);
+
+    transform:
+        translate(-50%, -50%)
+        scale(1) !important;
+
+    z-index: 70;
+
+    text-align: center;
+
+}
+
+
+/* -----------------------------------------
+   NAMES
+   ----------------------------------------- */
+
+.diya-opening.is-revealed .diya-names {
+
+    margin: 0 !important;
+
+    font-size:
+        clamp(42px, 5.5vw, 68px);
+
+    line-height: 1;
+
+}
+
+
+/* -----------------------------------------
+   TAGLINE
+   ----------------------------------------- */
+
+.diya-opening.is-revealed .diya-tagline {
+
+    margin-top: 14px !important;
+
+}
+
+
+/* -----------------------------------------
+   DATE
+   ----------------------------------------- */
+
+.diya-opening.is-revealed .diya-date {
+
+    margin-top: 10px !important;
+
+}
+
+
+/* -----------------------------------------
+   GOLD DIVIDER
+   ----------------------------------------- */
+
+.diya-opening.is-revealed .diya-gold-divider {
+
+    margin-top: 16px !important;
+
+    margin-bottom: 14px !important;
+
+}
+
+
+/* =========================================================
+   ENTER OUR STORY BUTTON
+   ========================================================= */
+
+.diya-opening.is-revealed .diya-enter {
+
+    display: inline-flex !important;
+
+    margin-top: 18px !important;
+
+    position: relative;
+
+    z-index: 100;
+
+    padding:
+        13px 25px;
+
+    min-width: 250px;
+
+    justify-content: center;
+
+    background:
+        rgba(48, 14, 29, .78);
+
+    border:
+        1px solid
+        rgba(232, 191, 112, .7);
+
+    box-shadow:
+        0 8px 30px
+        rgba(0,0,0,.35);
+
+}
+
+
+/* Button hover */
+
+.diya-opening.is-revealed .diya-enter:hover {
+
+    transform:
+        translateY(-3px);
+
+    background:
+        rgba(91, 29, 48, .9);
+
+    box-shadow:
+        0 12px 35px
+        rgba(230, 178, 87, .18);
+}
+
+
+/* =========================================================
+   DIYA
+   ========================================================= */
+
+.diya-opening.is-revealed .diya-holder {
+
+    position: absolute !important;
+
+    left: 50% !important;
+    right: auto !important;
+
+    /*
+       Put diya well BELOW the button.
+    */
+
+    top: 69% !important;
+
+    bottom: auto !important;
+
+    width: 175px !important;
+    height: 170px !important;
+
+    transform:
+        translate(-50%, -50%)
+        scale(.9) !important;
+
+    opacity: 1 !important;
+
+    z-index: 40;
+
+    pointer-events: none !important;
+
+}
+
+
+/* =========================================================
+   MAKE SPACE BETWEEN BUTTON AND DIYA
+   ========================================================= */
+
+.diya-opening.is-revealed .diya-holder::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+
+    top: -45px;
+
+    width: 2px;
+
+    height: 35px;
+
+    transform:
+        translateX(-50%);
+
+    background:
+        linear-gradient(
+            to bottom,
+            transparent,
+            rgba(241,193,102,.35)
+        );
+
+    opacity: .6;
+
+}
+
+
+/* =========================================================
+   FLAME GLOW
+   ========================================================= */
+
+.diya-opening.is-revealed .diya-flame-glow {
+
+    opacity: 1 !important;
+
+    transform:
+        translateX(-50%)
+        scale(2.3) !important;
+}
+
+
+/* =========================================================
+   DESKTOP SHORT SCREEN
+   ========================================================= */
+
+@media (max-height: 750px) and (min-width: 769px) {
+
+    .diya-opening.is-revealed .diya-reveal {
+
+        top: 25% !important;
+
+        transform:
+            translate(-50%, -50%)
+            scale(.88) !important;
+    }
+
+
+    .diya-opening.is-revealed .diya-holder {
+
+        top: 70% !important;
+
+        transform:
+            translate(-50%, -50%)
+            scale(.78) !important;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    .diya-opening.is-revealed .diya-reveal {
+
+        top: 25% !important;
+
+        width: 94vw;
+
+        transform:
+            translate(-50%, -50%)
+            scale(.82) !important;
+    }
+
+
+    .diya-opening.is-revealed .diya-names {
+
+        font-size: 39px;
+
+        line-height: .95;
+    }
+
+
+    .diya-opening.is-revealed .diya-enter {
+
+        min-width: 220px;
+
+        margin-top: 14px !important;
+
+        padding:
+            11px 20px;
+    }
+
+
+    .diya-opening.is-revealed .diya-holder {
+
+        top: 70% !important;
+
+        width: 155px !important;
+        height: 150px !important;
+
+        transform:
+            translate(-50%, -50%)
+            scale(.82) !important;
+    }
+
+}
+/* =========================================
+   DIYA EXIT TRANSITION
+========================================= */
+
+.diya-opening {
+    opacity: 1;
+    transform: scale(1);
+    transition:
+        opacity 0.7s ease,
+        transform 0.7s ease;
+}
+
+
+.diya-opening.leaving {
+    opacity: 0;
+    transform: scale(1.04);
+    pointer-events: none;
+}
+
