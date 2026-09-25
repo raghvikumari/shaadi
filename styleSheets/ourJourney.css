@@ -303,6 +303,33 @@
     box-sizing: border-box;
 
     padding: 30px 42px;
+
+    transition: opacity .18s ease;
+}
+
+
+/* ============================================================
+   BLANK BACK WHILE FLIPPING
+
+   StPageFlip only ever draws ONE face for a soft page - there is
+   no real "back" side - so while a page curls over, it just shows
+   its own front text again (rotated), instead of a blank back.
+
+   The library always marks whichever page is CURRENTLY turning
+   with an inline z-index of "startZIndex + 5". startZIndex is
+   left at its default (0) here, so the turning page always ends
+   up with "z-index: 5" in its inline style. We use that as a hook
+   to hide its text while it is mid-flip, leaving just the blank
+   paper behind it - the actual page being revealed underneath is
+   a separate element and is unaffected by this rule. Hard pages
+   (the front/back cover) already do a true 3D flip with
+   backface-visibility: hidden and don't need this.
+   ============================================================ */
+
+.diary-book .story-page.stf__item[style*="z-index: 5;"] .page-inner {
+    opacity: 0;
+
+    pointer-events: none;
 }
 
 
