@@ -30,6 +30,16 @@ function initializeScratchCard() {
 
     let scratchedDistance = 0;
 
+    /*
+     * Only allow scratching once the card is
+     * mostly settled in the viewport. This stops
+     * a scroll gesture that merely passes over the
+     * card (finger swiping down the page) from being
+     * mistaken for a scratch before the user has even
+     * finished scrolling to it.
+     */
+    let cardInView = false;
+
     const BRUSH_SIZE = 42;
     const TAP_DISTANCE = 6;
 
@@ -388,6 +398,10 @@ function initializeScratchCard() {
             return;
         }
 
+        if (!cardInView) {
+            return;
+        }
+
 
         event.preventDefault();
 
@@ -707,6 +721,40 @@ createGoldenSparkles();
             }
         }
     );
+
+
+    /* =====================================================
+       ONLY ARM SCRATCHING ONCE CARD IS IN VIEW
+    ===================================================== */
+
+    if ("IntersectionObserver" in window) {
+
+        const cardObserver = new IntersectionObserver(
+            (entries) => {
+
+                entries.forEach((entry) => {
+
+                    cardInView =
+                        entry.isIntersecting &&
+                        entry.intersectionRatio >= 0.6;
+                });
+            },
+            {
+                threshold: [0, 0.6, 1]
+            }
+        );
+
+        cardObserver.observe(area);
+
+    } else {
+
+        /*
+         * No IntersectionObserver support:
+         * fall back to always-armed behaviour.
+         */
+
+        cardInView = true;
+    }
 }
 
 
