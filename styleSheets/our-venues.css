@@ -587,12 +587,25 @@
     color: #a48754;
 }
 
+.venue-paper h6 {
+    margin: 0;
+
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: 24px;
+
+    font-weight: 600;
+
+    line-height: 0.85;
+
+    color: #7e2940;
+}
 .venue-paper h3 {
     margin: 0;
 
     font-family: "Cormorant Garamond", serif;
 
-    font-size: 54px;
+    font-size: 30px;
 
     font-weight: 600;
 
