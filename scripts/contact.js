@@ -3,7 +3,7 @@ function initializeContactForm() {
     const whatsappBtn = document.getElementById('whatsappBtn');
     const statusText = document.getElementById('status');
 
-    const RECIPIENT_EMAIL = 'kumarraghu1357@gmail.com';
+    const RECIPIENT_EMAIL = 'anuraghwedding@gmail.com';
     const WHATSAPP_NUMBER = '917003038143';
 
     // Helper to get form input values

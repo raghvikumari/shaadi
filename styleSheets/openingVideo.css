@@ -989,7 +989,7 @@
     height: 55px;
     margin: 12px auto 0;
     overflow: hidden;
-    background: rgba(14, 7, 1, 0.25);
+    background: rgba(255, 220, 150, .25);
 }
 
 .grand-scroll-line i {
@@ -1665,4 +1665,12 @@
 
 .diya-opening.is-lit .diya-wick {
     opacity: 1 !important;
+}
+.diya-couple-name {
+    display: block;
+    font-family: "Great Vibes", cursive;
+    font-size: 2.5rem;
+    color: #d4af37;
+    margin-top: 8px;
+    text-align: center;
 }

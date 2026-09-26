@@ -48,7 +48,7 @@ function initializeScratchCard() {
      * Instead, use approximate movement distance.
      * This is dramatically lighter and prevents freezing.
      */
-    const REQUIRED_SCRATCH_DISTANCE = 60000;
+    const REQUIRED_SCRATCH_DISTANCE = 3000;
 
 
     /* =====================================================
