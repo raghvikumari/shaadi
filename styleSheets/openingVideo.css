@@ -694,7 +694,7 @@
 .diya-date {
     margin: 12px 0 0;
     color: var(--cream);
-    font-size: 11px;
+    font-size: 19px;
     font-weight: 600;
     letter-spacing: 3px;
 }
@@ -829,7 +829,7 @@
     .diya-family { font-size: 8px; letter-spacing: 2.5px; }
     .diya-gold-divider span { width: 46px; }
     .diya-tagline { font-size: 8px; letter-spacing: 2px; }
-    .diya-date { font-size: 9px; }
+    .diya-date { font-size: 19px; }
 
     .diya-bottom { bottom: 16px; }
 }
@@ -989,7 +989,7 @@
     height: 55px;
     margin: 12px auto 0;
     overflow: hidden;
-    background: rgba(255, 220, 150, .25);
+    background: rgba(14, 7, 1, 0.25);
 }
 
 .grand-scroll-line i {

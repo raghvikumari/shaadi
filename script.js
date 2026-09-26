@@ -613,18 +613,13 @@ function playBackgroundMusic() {
 
 async function loadHome() {
 
-    // Guard against loadHome() being triggered more than once (e.g. the
-    // user double-tapping "Enter Our Story").
+  
     if (homeLoaded) return;
     homeLoaded = true;
 
-    // Kick off the music immediately, still inside the click's
-    // user-gesture context, before the first `await` below.
     playBackgroundMusic();
 
-    // If prefetchHomePages() was already triggered while the opening
-    // animation was playing, this resolves instantly (or much sooner)
-    // instead of starting 10 fresh sequential requests only now.
+   
     const htmlParts = await prefetchHomePages();
 
     // Replace the opening (diya + grand scene) entirely with the main site.
